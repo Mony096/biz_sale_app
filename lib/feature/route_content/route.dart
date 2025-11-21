@@ -557,18 +557,18 @@ class _RouteContentState extends State<RouteContent> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+          margin: EdgeInsets.only(left: 20, right: 20, top: 20,bottom:20),
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7),
             color: Color.fromARGB(255, 255, 255, 255),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 2),
-              ),
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.black.withOpacity(0.05),
+            //     blurRadius: 10,
+            //     offset: const Offset(0, 2),
+            //   ),
+            // ],
           ),
          
           child: const Row(
@@ -605,7 +605,7 @@ class _RouteContentState extends State<RouteContent> {
         ),
         Expanded(
           child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: Column(
               children: [
                 _buildCustomerInfoCard(),
