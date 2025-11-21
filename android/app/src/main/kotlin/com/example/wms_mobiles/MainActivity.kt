@@ -1,4 +1,4 @@
-package com.example.wmsmobiles_offline_mode
+package com.example.sale_app
 
 import android.content.Context
 import android.os.BatteryManager
