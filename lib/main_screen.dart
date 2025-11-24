@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sale_app/dashboard/dashboard.dart';
+import 'package:sale_app/layout/layout.dart';
 import 'package:sale_app/feature/middleware/presentation/bloc/authorization_bloc.dart';
 import 'package:sale_app/feature/middleware/presentation/login_screen.dart';
 import 'package:sale_app/utilies/storage/locale_storage.dart';
@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
     // Auto-navigate after loading
     if (hasCredentials) {
       _navigatorKey.currentState?.pushReplacement(
-        MaterialPageRoute(builder: (_) => const Dashboard()),
+        MaterialPageRoute(builder: (_) => const LayoutScreen()),
       );
     }
   }
@@ -67,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
           );
         } else if (state is AuthorizationSuccess) {
           _navigatorKey.currentState?.pushReplacement(
-            MaterialPageRoute(builder: (_) => const Dashboard()),
+            MaterialPageRoute(builder: (_) => const LayoutScreen()),
           );
         }
       },
@@ -88,9 +88,9 @@ class _MainScreenState extends State<MainScreen> {
                 : BlocBuilder<AuthorizationBloc, AuthorizationState>(
                     builder: (context, state) {
                       if (hasCredentials) {
-                        return const Dashboard();
+                        return const LayoutScreen();
                       } else if (state is AuthorizationSuccess) {
-                        return const Dashboard();
+                        return const LayoutScreen();
                       } else {
                         return const LoginScreen();
                       }

@@ -164,34 +164,38 @@ class _OrderContentState extends State<OrderContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color(0xFFF5F5F5),
-        body: Column(
-          children: [
-            _buildTopBar(),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    _buildHeader(),
-                    const SizedBox(height: 10),
-                    Expanded(child: _buildOrderTable()), // ✅ now works
-                    const SizedBox(height: 10),
-                    _buildPagination(),
-                  ],
-                ),
-              ),
+    return Column(
+      children: [
+        _buildTopBar(),
+        Expanded(
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 12),
+            child: Column(
+              children: [
+                _buildHeader(),
+                const SizedBox(height: 10),
+                Expanded(child: _buildOrderTable()), // ✅ now works
+                const SizedBox(height: 10),
+                _buildPagination(),
+              ],
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildTopBar() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      margin: EdgeInsets.only(left: 22, right: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
         boxShadow: [
           BoxShadow(
             color: Color(0x0F000000),
@@ -209,7 +213,7 @@ class _OrderContentState extends State<OrderContent> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF0A1628),
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
             ),
@@ -254,7 +258,7 @@ class _OrderContentState extends State<OrderContent> {
         style: ElevatedButton.styleFrom(
           backgroundColor: isSelected ? const Color(0xFF0A1628) : Colors.white,
           foregroundColor: isSelected ? Colors.white : Colors.black87,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           elevation: isSelected ? 2 : 0,
           side: BorderSide(
               color: isSelected

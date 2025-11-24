@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sale_app/constant/style.dart';
-import 'package:sale_app/dashboard/dashboard.dart';
+import 'package:sale_app/layout/layout.dart';
 import 'package:sale_app/feature/middleware/presentation/bloc/authorization_bloc.dart';
 import 'package:sale_app/feature/middleware/presentation/setting_screen.dart';
 import 'package:sale_app/utilies/dialog/dialog.dart';
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (_) => const Dashboard(),
+            builder: (_) => const LayoutScreen(),
           ),
           (Route<dynamic> route) => false, // removes all previous routes
         );

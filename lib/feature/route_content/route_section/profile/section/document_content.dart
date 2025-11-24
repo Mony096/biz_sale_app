@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-// --- Data Models ---
-
-// Represents the categories in the left sidebar
 class ContentType {
   final String name;
   final int fileCount;
+  final int totalItem;
   final IconData icon;
   final Color color;
 
   ContentType({
     required this.name,
     required this.fileCount,
+    required this.totalItem,
     required this.icon,
     required this.color,
   });
@@ -36,14 +35,14 @@ class FileItem {
 
 // --- Main Dashboard Widget ---
 
-class ELearningContent extends StatefulWidget {
-  const ELearningContent({super.key});
+class DocumentContent extends StatefulWidget {
+  const DocumentContent({super.key});
 
   @override
-  State<ELearningContent> createState() => _ELearningContentState();
+  State<DocumentContent> createState() => _DocumentContentState();
 }
 
-class _ELearningContentState extends State<ELearningContent> {
+class _DocumentContentState extends State<DocumentContent> {
   // State for tracking the currently selected category
   String _selectedType = 'Training Material';
 
@@ -53,23 +52,27 @@ class _ELearningContentState extends State<ELearningContent> {
   // Mock Data for Content Types
   final List<ContentType> _contentTypes = [
     ContentType(
-        name: 'Training Material',
+        name: 'Planograms',
         fileCount: 4, // Updated count
+        totalItem: 360,
         icon: Icons.description_outlined,
         color: const Color(0xFF66BB6A)), // Green
     ContentType(
-        name: 'Selling Story',
+        name: 'Sale Plan',
         fileCount: 2, // Updated count
+        totalItem: 360,
         icon: Icons.history_edu_outlined,
         color: const Color(0xFF42A5F5)), // Blue
     ContentType(
-        name: 'Plan',
+        name: 'Planing',
         fileCount: 2, // Updated count
+        totalItem: 360,
         icon: Icons.assignment_outlined,
         color: const Color(0xFFFFCA28)), // Yellow/Amber
     ContentType(
         name: 'Sale Report',
         fileCount: 4, // Updated count
+        totalItem: 360,
         icon: Icons.bar_chart_outlined,
         color: const Color(0xFFEF5350)), // Red
   ];
@@ -180,9 +183,26 @@ class _ELearningContentState extends State<ELearningContent> {
   Widget build(BuildContext context) {
     // The main Scaffold is built for a tablet/desktop view, matching the image's layout.
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       // <-- Flex Widget #1 (Vertical)
       children: [
-        _buildTopBar(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 45, left: 25),
+              child: Text(
+                'Documents',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E1E1E),
+                ),
+              ),
+            ),
+            _buildSearchBar(),
+          ],
+        ),
         Expanded(
           // <-- Expanded #1 (Takes remaining vertical space)
           child: Row(
@@ -201,82 +221,12 @@ class _ELearningContentState extends State<ELearningContent> {
     );
   }
 
-  Widget _buildTopBar() {
-    return Container(
-      margin: EdgeInsets.only(left: 22, right: 22),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          bottomRight: Radius.circular(10),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x0F000000),
-            blurRadius: 8,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.arrow_back, size: 18),
-            label: const Text('Back'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0A1628),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-            ),
-          ),
-          const SizedBox(width: 16),
-          const Text(
-            'E-Learning',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1E1E1E),
-            ),
-          ),
-
-          // _buildTabButton('Product'),
-          // _buildTabButton('AR Collection'),
-          const Spacer(),
-          _buildSearchBar(),
-          const SizedBox(width: 16),
-
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0A1628),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text('Continue'),
-                SizedBox(width: 8),
-                Icon(Icons.keyboard_arrow_right, size: 20),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   // Custom search bar implementation
   Widget _buildSearchBar() {
     return Container(
+      margin: EdgeInsets.only(right: 20, top: 20),
       width: 300,
-      height: 48,
+      height: 55,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -312,19 +262,10 @@ class _ELearningContentState extends State<ELearningContent> {
       ),
       margin: EdgeInsets.only(left: 20, top: 20),
       width: 250,
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.only(left: 24, top: 5, right: 24, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Type',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               itemCount: _contentTypes.length,
@@ -380,10 +321,20 @@ class _ELearningContentState extends State<ELearningContent> {
                   ),
                 ),
                 Text(
+                  '${type.totalItem} Items',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey.shade500,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
                   '${type.fileCount} Files',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey.shade500,
+                    color: Colors.grey.shade600,
                   ),
                 ),
               ],
@@ -501,38 +452,38 @@ class _ELearningContentState extends State<ELearningContent> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      item.date,
-                      style:
-                          TextStyle(fontSize: 13, color: Colors.grey.shade600),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      '·',
-                      style: TextStyle(fontSize: 13, color: Colors.grey),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      item.size,
-                      style:
-                          TextStyle(fontSize: 13, color: Colors.grey.shade600),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       item.date,
+                //       style:
+                //           TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                //     ),
+                //     const SizedBox(width: 8),
+                //     const Text(
+                //       '·',
+                //       style: TextStyle(fontSize: 13, color: Colors.grey),
+                //     ),
+                //     const SizedBox(width: 8),
+                //     Text(
+                //       item.size,
+                //       style:
+                //           TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
 
-          // Download Icon (Right side)
-          IconButton(
-            icon: Icon(Icons.download_for_offline_outlined,
-                color: cardColor, size: 28),
-            onPressed: () {
-              // Handle download action
-            },
-          ),
+          // // Download Icon (Right side)
+          // IconButton(
+          //   icon: Icon(Icons.download_for_offline_outlined,
+          //       color: cardColor, size: 28),
+          //   onPressed: () {
+          //     // Handle download action
+          //   },
+          // ),
           const SizedBox(width: 15),
         ],
       ),

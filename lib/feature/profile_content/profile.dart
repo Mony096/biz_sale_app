@@ -36,52 +36,54 @@ class _ProfileContentState extends State<ProfileContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: Column(
-        children: [
-          _buildTopBar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(40),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildLeftSection(),
-                        const SizedBox(width: 60),
-                        Expanded(child: _buildRightSection()),
-                      ],
+    return Column(
+      children: [
+        _buildTopBar(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(22, 20, 22, 22),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
                     ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildLeftSection(),
+                      const SizedBox(width: 60),
+                      Expanded(child: _buildRightSection()),
+                    ],
                   ),
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget _buildTopBar() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      margin: EdgeInsets.only(left: 22, right: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
         boxShadow: [
           BoxShadow(
             color: Color(0x0F000000),
@@ -99,7 +101,7 @@ class _ProfileContentState extends State<ProfileContent> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF0A1628),
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
             ),
@@ -119,7 +121,7 @@ class _ProfileContentState extends State<ProfileContent> {
               children: const [
                 Text('Continue'),
                 SizedBox(width: 8),
-                Icon(Icons.keyboard_arrow_right, size: 24),
+                Icon(Icons.keyboard_arrow_right, size: 20),
               ],
             ),
           )

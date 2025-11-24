@@ -10,14 +10,14 @@ import 'package:sale_app/feature/route_content/route.dart';
 import 'package:sale_app/feature/sync_content/sync.dart';
 import 'package:sale_app/utilies/dialog/dialog.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class LayoutScreen extends StatefulWidget {
+  const LayoutScreen({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<LayoutScreen> createState() => _LayoutScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _LayoutScreenState extends State<LayoutScreen> {
   int _selectedIndex = 0;
   void _logout(BuildContext context) {
     MaterialDialog.loading(context);
@@ -32,16 +32,19 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
-          // Sidebar
-          _buildSidebar(),
+          // 1. TOP BAR (Full width)
+          _buildTopBar(),
 
-          // Main Content - Dynamic based on selected menu
+          // 2. SIDEBAR + MAIN CONTENT
           Expanded(
-            child: Column(
+            child: Row(
               children: [
-                _buildTopBar(),
+                // Sidebar
+                _buildSidebar(),
+
+                // Main Content
                 Expanded(
                   child: _getSelectedScreen(),
                 ),
@@ -77,10 +80,20 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildSidebar() {
     return Container(
-      width: 110,
-      color: const Color(0xFF0A1628),
+      width: 120,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      // color: const Color(0xFF0A1628),
       child: ListView(
-        padding: const EdgeInsets.only(top: 50),
+        padding: const EdgeInsets.only(top: 13),
         children: [
           _buildSidebarItem(Icons.dashboard, 'Dashboard', 0),
           _buildSidebarItem(Icons.route, 'Routes', 1),
@@ -90,7 +103,7 @@ class _DashboardState extends State<Dashboard> {
           _buildSidebarItem(Icons.sync, 'Sync', 5),
           _buildSidebarItem(Icons.person, 'Profile', 6),
 
-          const SizedBox(height: 10), // takes place of Spacer()
+          // const SizedBox(height: 10), // takes place of Spacer()
 
           _buildSidebarItem(Icons.logout, 'Log Out', 7, isLogout: true),
         ],
@@ -110,10 +123,13 @@ class _DashboardState extends State<Dashboard> {
         }
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.blue.shade700 : Colors.transparent,
+          // color: isSelected ? Colors.blue.shade700 : Colors.transparent,
+          color: isSelected
+              ? const Color.fromARGB(255, 236, 238, 239)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -121,15 +137,19 @@ class _DashboardState extends State<Dashboard> {
           children: [
             Icon(
               icon,
-              color: isLogout ? Colors.red.shade300 : Colors.white,
+              // color: isLogout ? Colors.red.shade300 : Colors.white,
+              color: isLogout ? Colors.red.shade300 : Color(0xFF0A1628),
+
               size: 24,
             ),
             const SizedBox(height: 4),
             Text(
               label,
               style: TextStyle(
-                color: isLogout ? Colors.red.shade300 : Colors.white,
-                fontSize: 12,
+                // color: isLogout ? Colors.red.shade300 : Colors.white,
+                color: isLogout ? Colors.red.shade300 : Color(0xFF0A1628),
+
+                fontSize: 12.5,
               ),
               textAlign: TextAlign.center,
             ),
@@ -164,6 +184,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildTopBar() {
     return Container(
+      height: 90,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       decoration: const BoxDecoration(
         color: Color(0xFF0A1628),

@@ -21,7 +21,7 @@ class _DashboardContentState extends State<DashboardContent> {
           _buildHeader(),
           const SizedBox(height: 24),
           _buildMetricsCards(),
-          const SizedBox(height: 32),
+          const SizedBox(height: 20),
           _buildChartsSection(),
         ],
       ),
@@ -66,84 +66,89 @@ class _DashboardContentState extends State<DashboardContent> {
   }
 
   Widget _buildMetricsCards() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            const Text(
-              "Today's Sales",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const Spacer(),
-            OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.file_download, size: 18),
-              label: const Text('Export'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.black87,
-                side: const BorderSide(color: Color(0xFFE0E0E0)),
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(13)),
+      padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text(
+                "Today's Sales",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          'Sales Summary',
-          style: TextStyle(color: Colors.grey, fontSize: 14),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            _buildMetricCard(
-              'Revenue',
-              '\$450',
-              '56%',
-              '800',
-              4.8,
-              Colors.green.shade50,
-              Colors.green,
-              true,
-            ),
-            const SizedBox(width: 16),
-            _buildMetricCard(
-              'Volume',
-              '50',
-              '62%',
-              '800',
-              -3.5,
-              Colors.red.shade50,
-              Colors.red,
-              false,
-            ),
-            const SizedBox(width: 16),
-            _buildMetricCard(
-              'Call Completion',
-              '22',
-              '62%',
-              '800',
-              null,
-              Colors.grey.shade100,
-              Colors.grey,
-              null,
-              subtitle: 'Calls',
-            ),
-            const SizedBox(width: 16),
-            _buildMetricCard(
-              'Strike Rate',
-              '22',
-              '62%',
-              '800',
-              null,
-              Colors.grey.shade100,
-              Colors.grey,
-              null,
-              subtitle: 'Calls',
-              isStrikeRate: true,
-            ),
-          ],
-        ),
-      ],
+              const Spacer(),
+              OutlinedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.file_download, size: 18),
+                label: const Text('Export'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.black87,
+                  side: const BorderSide(color: Color(0xFFE0E0E0)),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Sales Summary',
+            style: TextStyle(color: Colors.grey, fontSize: 14),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              _buildMetricCard(
+                'Revenue',
+                '\$450',
+                '56%',
+                '800',
+                4.8,
+                Colors.green.shade50,
+                const Color.fromARGB(255, 73, 173, 76),
+                true,
+              ),
+              const SizedBox(width: 16),
+              _buildMetricCard(
+                'Volume',
+                '50',
+                '62%',
+                '800',
+                -3.5,
+                Colors.red.shade50,
+                Colors.red,
+                false,
+              ),
+              const SizedBox(width: 16),
+              _buildMetricCard(
+                'Call Completion',
+                '22',
+                '62%',
+                '800',
+                null,
+                Colors.grey.shade100,
+                Colors.grey,
+                null,
+                subtitle: 'Calls',
+              ),
+              const SizedBox(width: 16),
+              _buildMetricCard(
+                'Strike Rate',
+                '22',
+                '62%',
+                '800',
+                null,
+                Colors.grey.shade100,
+                Colors.grey,
+                null,
+                subtitle: 'Calls',
+                isStrikeRate: true,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
